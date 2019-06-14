@@ -58,4 +58,16 @@ public class Lloguer {
         }
 		return quantitat;
     }
+	
+	public Integer bonificacionsDeLloguer() {
+    	/*como en cada alquiler se le sumaba siempre una bonificacion,
+    	entonces ya inicio la variable en 1 y si cumple la condición sumara 1*/
+    	Integer bonificacion = 1;
+    	// afegeix bonificació per dos dies de lloguer de Luxe
+        if (this.getVehicle().getCategoria() == Vehicle.LUXE &&
+                this.getDies()>1 ) {
+        	bonificacion ++;
+        }
+    	return bonificacion;
+    }
 }
