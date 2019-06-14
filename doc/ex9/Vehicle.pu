@@ -1,0 +1,33 @@
+@startuml
+    skinparam classAttributeIconSize 0
+    skinparam class {
+        BackgroundColor #ffffff
+        ArrowColor #0000FF
+    }
+
+    hide circle
+
+    Class Vehicle {
+        + {static} BASIC: String
+        + {static} GENERAL: String
+        + {static} LUXE: String
+        
+        - model: String
+        - marca: String
+        - categoria: String
+
+        + Vehicle(marca: String, model: String, categoria: String): void
+
+        + getMarca(): String
+
+        + setMarca(marca: String): void
+        
+        + getModel(): String
+        
+        + setModel(String model): void
+
+        + getCategoria(): String
+
+        + setCategoria(String categoria): void
+    }
+@enduml
