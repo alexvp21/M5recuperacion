@@ -1,0 +1,17 @@
+@startuml
+    skinparam classAttributeIconSize 0
+    skinparam class {
+        BackgroundColor #ffffff
+        ArrowColor #0000FF
+    }
+
+    hide circle
+
+    Class GestorLloguersLite {
+	
+	+ nouLloguer(fecha: String, dias: Integer, categoria: String): Lloguer
+
+    + {static} historialLloguer(client: Client): String
+
+    }
+@enduml
