@@ -102,4 +102,26 @@ public class GestorLloguersLite {
 		resultat += "Import a pagar: " + total + "€\n" + "Punts guanyats: " + bonificacions + "\n";
 		return resultat;
 	}
+	
+	public static double quantitat(Lloguer lloguer) {
+    	double quantitat = 0;
+        switch (lloguer.getVehicle().getCategoria()) {
+            case Vehicle.BASIC:
+                quantitat += 3;
+                if (lloguer.getDies() > 3) {
+                    quantitat += (lloguer.getDies() - 3) * 1.5;
+                }
+                break;
+            case Vehicle.GENERAL:
+                quantitat += 4;
+                if (lloguer.getDies() > 2) {
+                    quantitat += (lloguer.getDies() - 2) * 2.5;
+                }
+                break;
+            case Vehicle.LUXE:
+                quantitat += lloguer.getDies() * 6;
+                break;
+        }
+		return quantitat;
+    }
 }
