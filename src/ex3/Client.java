@@ -50,7 +50,7 @@ public class Client {
             getNom() +
             " (" + getNif() + ")\n";
         for (Lloguer lloguer: lloguers) {
-            double quantitat = GestorLloguersLite.quantitat(lloguer);
+            double quantitat = lloguer.quantitat();
             bonificacions += bonificacionsDeLloguer(lloguer);
 
             // composa els resultats d'aquest lloguer
