@@ -43,26 +43,26 @@ public class Lloguer {
 		this.vehicle = vehicle;
 	}
 	
-	public double quantitat() {
-    	double quantitat = 0;
+	public double preuLloguer() {
+    	double preu = 0;
         switch (this.getVehicle().getCategoria()) {
             case Vehicle.BASIC:
-                quantitat += QUANTITAT_VEHICLE_BASIC;
+            	preu += QUANTITAT_VEHICLE_BASIC;
                 if (this.getDies() > COMP_DIES_VEHIVLE_BASIC) {
-                    quantitat += (this.getDies() - COMP_DIES_VEHIVLE_BASIC) * 1.5;
+                	preu += (this.getDies() - COMP_DIES_VEHIVLE_BASIC) * 1.5;
                 }
                 break;
             case Vehicle.GENERAL:
-                quantitat += QUANTITAT_VEHICLE_GENERAL;
+            	preu += QUANTITAT_VEHICLE_GENERAL;
                 if (this.getDies() > COMP_DIES_VEHIVLE_GENERAL) {
-                    quantitat += (this.getDies() - COMP_DIES_VEHIVLE_GENERAL) * 2.5;
+                	preu += (this.getDies() - COMP_DIES_VEHIVLE_GENERAL) * 2.5;
                 }
                 break;
             case Vehicle.LUXE:
-                quantitat += this.getDies() * COMP_DIES_VEHIVLE_LUXE;
+            	preu += this.getDies() * COMP_DIES_VEHIVLE_LUXE;
                 break;
         }
-		return quantitat;
+		return preu;
     }
 	
 	public Integer bonificacionsDeLloguer() {
