@@ -1,0 +1,26 @@
+@startuml
+    skinparam classAttributeIconSize 0
+    skinparam class {
+        BackgroundColor #ffffff
+        ArrowColor #0000FF
+    }
+
+    hide circle
+
+    Class Lloguer {
+        - data: Date
+        - dies: Integer
+        - vehicle: Vehicle
+        
+        + Lloguer(data: Date, dies: Integer, vehicle: Vehicle): void
+        
+        + getData(): Date
+        + setData(data: Date): void
+        + getDies(): Integer
+        + setDies(dies: Integer): void
+        + getVehicle(): Vehicle
+        + setVehicle(vehicle: Vehicle): Vehicle
+        + preuLloguer(): double
+        + bonificacionsDeLloguer(): Integer
+    }
+@enduml

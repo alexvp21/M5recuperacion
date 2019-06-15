@@ -1,0 +1,41 @@
+@startuml
+    skinparam classAttributeIconSize 0
+    skinparam class {
+        BackgroundColor #ffffff
+        ArrowColor #0000FF
+    }
+
+    hide circle
+
+    Class Client {
+        - nif: String
+        - nom: String
+        - telefon: String
+        - lloguers: Vector
+
+        + Client(nif: String, nom: String, telefon: String): void
+        
+        + getNif(): String
+        + getNom(): String
+        + getTelefon(): String
+        + setNif(nif: String): void
+        + setNom(nom: String): void
+        + setTelefon(telefon: String): void
+        + afegeix(lloguer: Lloguer): void
+        + elimina(lloguer: Lloguer): void
+        + conte(lloguer: Lloguer): boolean
+        + informeHTML(): String
+        + informe(): String
+
+        +informeCapsalera(): String
+        +informeDetall(): String
+        +informePeu(): String
+
+        +informeHTMLCapsalera(): String
+        +informeHTMLDetall(): String
+        +informeHTMLPeu(): String
+
+        +importTotal(): double
+        +bonificacionsTotals(): int
+    }
+@enduml
