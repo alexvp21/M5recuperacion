@@ -3,7 +3,6 @@ package ex3;
 import java.util.Vector;
 
 import ex2.Lloguer;
-import ex2.Vehicle;
 
 public class Client {
     private String nif;
@@ -44,7 +43,6 @@ public class Client {
         return this.lloguers;
     }
     public String informe() {
-        double total = 0;
         int bonificacions = 0;
         String resultat = "Informe de lloguers del client " +
             getNom() +
@@ -58,12 +56,21 @@ public class Client {
                 " " +
                 lloguer.getVehicle().getModel() + ": " +
                 (lloguer.quantitat() * 30) + "€" + "\n";
-            total += lloguer.quantitat() * 30;
         }
 
         // afegeix informació final
-        resultat += "Import a pagar: " + total + "€\n" +
+        resultat += "Import a pagar: " + importTotal() + "€\n" +
             "Punts guanyats: " + bonificacions + "\n";
         return resultat;
     }
+    
+    private int importTotal() {
+    	int total = 0;
+    	for (Lloguer lloguer: lloguers) {
+    		total += lloguer.quantitat() * 30;
+    	}
+    	return total;
+    }
+    
+    
 }
