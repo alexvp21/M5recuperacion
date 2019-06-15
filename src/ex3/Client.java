@@ -45,6 +45,13 @@ public class Client {
     public Vector<Lloguer> getLloguers() {
         return this.lloguers;
     }
+    
+    public String informeHTML() {
+    	return informeHTMLCapsalera() +
+    			informeHTMLDetall() +
+    			informeHTMLPeu();
+    }
+    
     public String informe() {
         return informeCapsalera() + 
         		informeDetall() + 
@@ -76,6 +83,43 @@ public class Client {
     	String resultat = "Import a pagar: " + importTotal() + DIVISA+"\n" +
         "Punts guanyats: " + bonificacionsTotals() + "\n";
     	return resultat;
+    }
+    
+    private String informeHTMLCapsalera() {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("<h1>Informe de lloguers</h1>");
+    	sb.append("<p>Informe de lloguers del client  <em>");
+    	sb.append(getNom()).append("</em>");
+    	sb.append("(<strong>").append(getNif()).append("</strong>)</p>");
+    	
+    	return sb.toString();
+    }
+    
+    private String informeHTMLDetall() {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("<table><tr><td><strong>Marca</strong></td><td><strong>Model</strong></td><td><strong>Import</strong></td></tr>");
+    	for (Lloguer lloguer: lloguers) {
+            sb.append("<tr>");
+            	sb.append("<td>");
+            		sb.append(lloguer.getVehicle().getMarca());
+            	sb.append("</td>");
+            	sb.append("<td>");
+        			sb.append(lloguer.getVehicle().getModel());
+        		sb.append("</td>");
+        		sb.append("<td>");
+    				sb.append((lloguer.preuLloguer() * EUROS_PER_UNITAT_DE_COST) + DIVISA);
+    			sb.append("</td>");
+            sb.append("</tr>");
+        }
+    	sb.append("</table>");
+    	return sb.toString();
+    }
+    
+    private String informeHTMLPeu() {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("<p>Import a pagar: <em>").append(importTotal() + DIVISA).append("</em></p>");
+    	sb.append("<p>Punts guanyats: <em>").append(bonificacionsTotals()).append("</em></p>");
+    	return sb.toString();
     }
     
     private double importTotal() {
