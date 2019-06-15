@@ -43,22 +43,36 @@ public class Client {
         return this.lloguers;
     }
     public String informe() {
-        String resultat = "Informe de lloguers del client " +
-            getNom() +
-            " (" + getNif() + ")\n";
-        for (Lloguer lloguer: lloguers) {
+        return informeCapsalera() + 
+        		informeDetall() + 
+        		informePeu();
+    }
+    
+    private String informeCapsalera() {
+    	String resultat = "Informe de lloguers del client " +
+        getNom() +
+        " (" + getNif() + ")\n";
+    	
+    	return resultat;
+    }
+    
+    private String informeDetall() {
+    	String resultat = "";
+    	for (Lloguer lloguer: lloguers) {
         	// composa els resultats d'aquest lloguer
             resultat += "\t" +
-                lloguer.getVehicle().getMarca() +
-                " " +
-                lloguer.getVehicle().getModel() + ": " +
-                (lloguer.quantitat() * 30) + "€" + "\n";
+            lloguer.getVehicle().getMarca() +
+            " " +
+            lloguer.getVehicle().getModel() + ": " +
+            (lloguer.quantitat() * 30) + "€" + "\n";
         }
-
-        // afegeix informació final
-        resultat += "Import a pagar: " + importTotal() + "€\n" +
-            "Punts guanyats: " + bonificacionsTotals() + "\n";
-        return resultat;
+    	return resultat;
+    }
+    
+    private String informePeu() {
+    	String resultat = "Import a pagar: " + importTotal() + "€\n" +
+        "Punts guanyats: " + bonificacionsTotals() + "\n";
+    	return resultat;
     }
     
     private double importTotal() {
