@@ -5,6 +5,9 @@ import java.util.Vector;
 import ex2.Lloguer;
 
 public class Client {
+	private static final double EUROS_PER_UNITAT_DE_COST = 30;
+	private static final String DIVISA = "€";
+	
     private String nif;
     private String nom;
     private String telefon;
