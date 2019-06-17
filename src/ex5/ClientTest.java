@@ -12,6 +12,7 @@ import ex2.Lloguer;
 import ex2.Vehicle;
 import ex3.Client;
 import ex3.GestorLloguersLite;
+import ex3.InformeDeClient;
 
 public class ClientTest {
 	// prueba con 1 alquiler de cada tipo
@@ -20,7 +21,7 @@ public class ClientTest {
 		GestorLloguersLite gesLloguer = new GestorLloguersLite();
 		Client client1 = gesLloguer.nouLloguer();
 		
-		assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+		assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
 	}
 	
 	// sin ningun alquier
@@ -28,7 +29,7 @@ public class ClientTest {
 	public void testInformeSenseLloguer() {
 		Client clientPrincipal = new Client("123123X", "Alexander Vargas Pierola", "345345345");
 		
-		assertEquals(clientPrincipal.informe(), GestorLloguersLite.historialLloguer(clientPrincipal));
+		assertEquals(new InformeDeClient(clientPrincipal).informe(), GestorLloguersLite.historialLloguer(clientPrincipal));
 	}
 	
 	// un alquiler de tipo basico de 1 dia
@@ -53,7 +54,7 @@ public class ClientTest {
 		
 		client1.afegeix(lloguerBasic);
 		
-		assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+		assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
 	}
 	
 	// un alquiler de tipo basico de 4 dias
@@ -78,7 +79,7 @@ public class ClientTest {
 		
 		client1.afegeix(lloguerBasic);
 		
-		assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+		assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
 	}
 	
 	// alquiler de tipo general por 2 dias
@@ -103,7 +104,7 @@ public class ClientTest {
 		
 		client1.afegeix(lloguerGeneral);
 		
-		assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+		assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
 	}
 	
 	// alquiler de tipo general por 5 dias
@@ -128,7 +129,7 @@ public class ClientTest {
 			
 			client1.afegeix(lloguerGeneral);
 			
-			assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+			assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
 		}
 	
 	// alquiler de tipo lujo por 2 dias
@@ -153,7 +154,7 @@ public class ClientTest {
 		
 		client1.afegeix(lloguerLuxe);
 		
-		assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+		assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
 	}
 	
 	// alquiler de tipo lujo por 1 dia
@@ -178,7 +179,16 @@ public class ClientTest {
 		
 		client1.afegeix(lloguerLuxe);
 		
-		assertEquals(client1.informe(), GestorLloguersLite.historialLloguer(client1));
+		assertEquals(new InformeDeClient(client1).informe(), GestorLloguersLite.historialLloguer(client1));
+	}
+	
+	//Prueba a crear el informe HTML con un alquiler de cada tipo
+	@Test
+	public void testInformeHTML() {
+		GestorLloguersLite gesLloguer = new GestorLloguersLite();
+		Client client1 = gesLloguer.nouLloguer();
+		
+		assertEquals(new InformeDeClient(client1).informeHTML(), GestorLloguersLite.historialLloguerHTML(client1));
 	}
 	
 	public static void main(String args[]) {

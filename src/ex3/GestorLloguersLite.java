@@ -103,25 +103,46 @@ public class GestorLloguersLite {
 		return resultat;
 	}
 	
-	public static double quantitat(Lloguer lloguer) {
-    	double quantitat = 0;
-        switch (lloguer.getVehicle().getCategoria()) {
-            case Vehicle.BASIC:
-                quantitat += 3;
-                if (lloguer.getDies() > 3) {
-                    quantitat += (lloguer.getDies() - 3) * 1.5;
-                }
-                break;
-            case Vehicle.GENERAL:
-                quantitat += 4;
-                if (lloguer.getDies() > 2) {
-                    quantitat += (lloguer.getDies() - 2) * 2.5;
-                }
-                break;
-            case Vehicle.LUXE:
-                quantitat += lloguer.getDies() * 6;
-                break;
+	public static String historialLloguerHTML(Client client) {
+		StringBuilder sb = new StringBuilder();
+    	sb.append("<h1>Informe de lloguers</h1>");
+    	sb.append("<p>Informe de lloguers del client  <em>");
+    	sb.append(client.getNom()).append("</em>");
+    	sb.append("(<strong>").append(client.getNif()).append("</strong>)</p>");
+    	sb.append("<table><tr><td><strong>Marca</strong></td><td><strong>Model</strong></td><td><strong>Import</strong></td></tr>");
+    	for (Lloguer lloguer: client.getLloguers()) {
+            sb.append("<tr>");
+            	sb.append("<td>");
+            		sb.append(lloguer.getVehicle().getMarca());
+            	sb.append("</td>");
+            	sb.append("<td>");
+        			sb.append(lloguer.getVehicle().getModel());
+        		sb.append("</td>");
+        		sb.append("<td>");
+    				sb.append((lloguer.preuLloguer() * Client.EUROS_PER_UNITAT_DE_COST) + Client.DIVISA);
+    			sb.append("</td>");
+            sb.append("</tr>");
         }
-		return quantitat;
+    	sb.append("</table>");
+    	sb.append("<p>Import a pagar: <em>").append(importTotal(client) + Client.DIVISA).append("</em></p>");
+    	sb.append("<p>Punts guanyats: <em>").append(bonificacionsTotals(client)).append("</em></p>");
+    	
+    	return sb.toString();
+	}
+	
+	private static double importTotal(Client client) {
+    	double total = 0;
+    	for (Lloguer lloguer: client.getLloguers()) {
+    		total += lloguer.preuLloguer() * Client.EUROS_PER_UNITAT_DE_COST;
+    	}
+    	return total;
+    }
+	
+	private static int bonificacionsTotals(Client client) {
+    	int bonificacions = 0;
+    	for (Lloguer lloguer: client.getLloguers()) {
+    		bonificacions += lloguer.bonificacionsDeLloguer();
+    	}
+    	return bonificacions;
     }
 }

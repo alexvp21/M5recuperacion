@@ -45,12 +45,4 @@ public class Client {
     public Vector<Lloguer> getLloguers() {
         return this.lloguers;
     }
-    
-    public String informeHTML() {
-    	return new InformeDeClient(this).informeHTML();
-    }
-    
-    public String informe() {
-    	return new InformeDeClient(this).informe();
-    }
 }
