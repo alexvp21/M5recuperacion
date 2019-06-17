@@ -191,6 +191,64 @@ public class ClientTest {
 		assertEquals(new InformeDeClient(client1).informeHTML(), GestorLloguersLite.historialLloguerHTML(client1));
 	}
 	
+	// informe HTML sin ningun alquier
+	@Test
+	public void testInformeHTMLSenseLloguer() {
+		Client clientPrincipal = new Client("123123X", "Alexander Vargas Pierola", "345345345");
+		
+		assertEquals(new InformeDeClient(clientPrincipal).informeHTML(), GestorLloguersLite.historialLloguerHTML(clientPrincipal));
+	}
+	
+	// un alquiler de tipo basico de 1 dia
+	@Test
+	public void testInformeHTML1LloguerBasic() {
+		Client client1 = new Client("123123X", "Alexander Vargas Pierola", "345345345");
+		
+		// defino el formato de la fecha
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
+
+		// demostració de construcció d'un vehicle de categoria BASIC
+		Vehicle vehicleBasic = new Vehicle("Tata", "Vista", Vehicle.BASIC);
+
+		// demostració de construccuó d'un lloguer amb una data
+		Date date = null;
+		try {
+			date = dateFormat.parse("8/1/2019");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Lloguer lloguerBasic = new Lloguer(date, 1, vehicleBasic);
+		
+		client1.afegeix(lloguerBasic);
+		
+		assertEquals(new InformeDeClient(client1).informeHTML(), GestorLloguersLite.historialLloguerHTML(client1));
+	}
+	
+	// un alquiler de tipo basico de 4 dias
+	@Test
+	public void testInformeHTML1LloguerBasicB() {
+		Client client1 = new Client("123123X", "Alexander Vargas Pierola", "345345345");
+		
+		// defino el formato de la fecha
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
+
+		// demostració de construcció d'un vehicle de categoria BASIC
+		Vehicle vehicleBasic = new Vehicle("Opel", "Corsa", Vehicle.BASIC);
+
+		// demostració de construccuó d'un lloguer amb una data
+		Date date = null;
+		try {
+			date = dateFormat.parse("8/1/2019");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Lloguer lloguerBasic = new Lloguer(date, 4, vehicleBasic);
+		
+		client1.afegeix(lloguerBasic);
+		
+		assertEquals(new InformeDeClient(client1).informeHTML(), GestorLloguersLite.historialLloguerHTML(client1));
+	}
+	
 	public static void main(String args[]) {
 		org.junit.runner.JUnitCore.main("TestPunt");
 	}

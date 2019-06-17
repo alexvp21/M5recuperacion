@@ -1,5 +1,8 @@
 package ex3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ex2.Lloguer;
 
 public class InformeDeClient {
@@ -19,6 +22,21 @@ public class InformeDeClient {
         return informeCapsalera(client) + 
         		informeDetall(client) + 
         		informePeu(client);
+    }
+    
+    private void setDatosInforme(Client client) {
+    	String nombre = client.getNom();
+    	String nif = client.getNif();
+    	List<InformacioLloguer> listaInfoLloguer = new ArrayList<InformacioLloguer>();
+    	for (Lloguer lloguer: client.getLloguers()) {
+    		InformacioLloguer infoLloguer = new InformacioLloguer();
+    		infoLloguer.setMarca(lloguer.getVehicle().getMarca());
+    		infoLloguer.setModel(lloguer.getVehicle().getModel());
+    		infoLloguer.setPreu(lloguer.preuLloguer() * Client.EUROS_PER_UNITAT_DE_COST);
+    		listaInfoLloguer.add(infoLloguer);
+        }
+    	double total = importTotal(client);
+    	int bonificacions = bonificacionsTotals(client);
     }
     
     private String informeCapsalera(Client client) {
