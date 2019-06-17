@@ -19,12 +19,10 @@ public class InformeDeClient {
     }
     
     public String informe() {
-        return informeCapsalera(client) + 
-        		informeDetall(client) + 
-        		informePeu(client);
+    	return setDatosInforme(client, informeCapsalera(), informeDetall(client), informePeu());
     }
     
-    private void setDatosInforme(Client client) {
+    private String setDatosInforme(Client client, String cabecera, String detalle, String pie) {
     	String nombre = client.getNom();
     	String nif = client.getNif();
     	List<InformacioLloguer> listaInfoLloguer = new ArrayList<InformacioLloguer>();
@@ -37,12 +35,12 @@ public class InformeDeClient {
         }
     	double total = importTotal(client);
     	int bonificacions = bonificacionsTotals(client);
+    	return null;
     }
     
-    private String informeCapsalera(Client client) {
-    	String resultat = "Informe de lloguers del client " +
-		client.getNom() +
-        " (" + client.getNif() + ")\n";
+    private String informeCapsalera() {
+    	String resultat = "Informe de lloguers del client %s" +
+        " (%s)%n";
     	
     	return resultat;
     }
@@ -51,18 +49,14 @@ public class InformeDeClient {
     	String resultat = "";
     	for (Lloguer lloguer: client.getLloguers()) {
         	// composa els resultats d'aquest lloguer
-            resultat += "\t" +
-            lloguer.getVehicle().getMarca() +
-            " " +
-            lloguer.getVehicle().getModel() + ": " +
-            (lloguer.preuLloguer() * Client.EUROS_PER_UNITAT_DE_COST) + Client.DIVISA + "\n";
+            resultat += "\t %s %s: %s" + Client.DIVISA + "\n";
         }
     	return resultat;
     }
     
-    private String informePeu(Client client) {
-    	String resultat = "Import a pagar: " + importTotal(client) + Client.DIVISA+"\n" +
-        "Punts guanyats: " + bonificacionsTotals(client) + "\n";
+    private String informePeu() {
+    	String resultat = "Import a pagar: %s" + Client.DIVISA+"\n" +
+        "Punts guanyats: %s" + "\n";
     	return resultat;
     }
     
